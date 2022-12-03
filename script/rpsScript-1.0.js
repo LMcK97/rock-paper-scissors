@@ -43,7 +43,34 @@ function playRound(computerSelection, playerSelection) {
 return playerWin; //Return whether or not the player has won this round
 }
 
-playerSelection = prompt("Please enter rock, paper or scissors!");
-playerSelection = playerSelection.toLowerCase();
-computerSelection = getComputerChoice();
-console.log(playRound(computerSelection, playerSelection));
+function game() {
+  let playerWins = 0; //Score trackers
+  let computerWins = 0;
+
+  for (i = 0; i < 5; i++) { //Loop 5 times
+    computerSelection = getComputerChoice(); 
+    playerSelection = prompt("Please enter rock, paper or scissors!"); //Get user input
+    playerSelection = playerSelection.toLowerCase(); //Make user input case-insensitive.
+    playRound(computerSelection, playerSelection); //Play a round 
+    
+    switch (playerWin) {
+      case true: //If the playerWin value is true, I.E if the player has won, increment the playerWins variable by 1.
+        playerWins++;
+        break;
+      case false: //See above
+        computerWins++;
+        break;
+    }
+  }
+
+
+  if (playerWins > computerWins) { //If the player has won more than the computer, display this message in the console.
+    console.log("Congratulations, You have won! Final score: " + playerWins + " " + computerWins);
+  }else if (playerWins < computerWins) {
+    console.log("You lost! Better luck next time.. Final score: " + playerWins + " " + computerWins);
+  }else if (playerWins === computerWins) {
+    console.log("It's a tie this time!");
+  }
+}
+
+game();
